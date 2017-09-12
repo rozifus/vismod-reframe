@@ -11,3 +11,13 @@
  :active-panel
  (fn [db _]
    (:active-panel db)))
+
+(re-frame/reg-sub
+ :open-solver-menu
+ (fn [db _]
+   (:open-solver-menu db)))
+
+(re-frame/reg-sub
+ :active-solver
+ (fn [db _]
+   (:active-solver db)))

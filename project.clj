@@ -24,7 +24,8 @@
                                     "resources/public/css"]
 
   :figwheel {:css-dirs ["resources/public/css"]
-             :ring-handler vismod-reframe.handler/dev-handler}
+             :ring-handler vismod-reframe.handler/dev-handler
+             :hawk-options {:watcher :polling}}
 
   :garden {:builds [{:id           "screen"
                      :source-paths ["src/clj"]

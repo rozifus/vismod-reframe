@@ -40,6 +40,11 @@
    :gap "1em"
    :children [[about-title] [link-to-home-page]]])
 
+(defn euclidean-solver []
+  [re-com/title
+    :label "euclidean solver!"
+    :level :level1])
+
 
 ;; main
 
@@ -49,12 +54,36 @@
     :about-panel [about-panel]
     [:div]))
 
+(defn- solver-panels [solver-name]
+  (case solver-name
+    :euclidean [euclidean-solver]
+    [:div]))
+
 (defn show-panel [panel-name]
   [panels panel-name])
+
+(defn solver-menu []
+  (let [open-solver-menu (re-frame/subscribe [:open-solver-menu])]
+    (fn []
+      [re-com/v-box
+       :size "200px"
+       :children []
+      ])))
+
+(defn solver []
+  (let [active-solver (re-frame/subscribe [:active-solver])]
+    (fn []
+      [re-com/v-box
+       :size "1"
+       :children [[solver-panels @active-solver]]
+      ])))
 
 (defn main-panel []
   (let [active-panel (re-frame/subscribe [:active-panel])]
     (fn []
-      [re-com/v-box
+      [re-com/h-box
+       :width "100%"
        :height "100%"
-       :children [[panels @active-panel]]])))
+       :children [[solver-menu] [solver]]
+      ])))
+

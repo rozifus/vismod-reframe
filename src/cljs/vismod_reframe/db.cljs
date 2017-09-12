@@ -1,4 +1,7 @@
 (ns vismod-reframe.db)
 
 (def default-db
-  {:name "re-frame"})
+  {:name "Ryan"
+   :open-solver-menu false 
+   :active-solver :euclidean
+   })
