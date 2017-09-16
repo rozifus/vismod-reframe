@@ -13,9 +13,9 @@
    (assoc db :active-panel active-panel)))
 
 (re-frame/reg-event-db
- :set-open-solver-menu
+ :set-open-main-menu
  (fn [db [_ open?]]
-   (assoc db :open-solver-menu open?)))
+   (assoc db :open-main-menu open?)))
 
 (re-frame/reg-event-db
  :set-active-solver

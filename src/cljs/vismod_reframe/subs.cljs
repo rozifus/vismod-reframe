@@ -13,9 +13,9 @@
    (:active-panel db)))
 
 (re-frame/reg-sub
- :open-solver-menu
+ :open-main-menu
  (fn [db _]
-   (:open-solver-menu db)))
+   (:open-main-menu db)))
 
 (re-frame/reg-sub
  :active-solver

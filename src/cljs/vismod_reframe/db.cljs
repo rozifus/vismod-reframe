@@ -2,6 +2,6 @@
 
 (def default-db
   {:name "Ryan"
-   :open-solver-menu false 
-   :active-solver :euclidean
+   :open-main-menu false 
+   :active-solver :multorder
    })
