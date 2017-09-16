@@ -7,7 +7,7 @@
 
 
 (defn point-ring [point-count size]
-  (let [step (/ (2 * Math/PI) point-count)
+  (let [step (/ (* 2 Math/PI) point-count)
         half-pi (/ Math/PI 2)]
     (for [i (range point-count)
           :let [angle (- (* i step) half-pi)]]
