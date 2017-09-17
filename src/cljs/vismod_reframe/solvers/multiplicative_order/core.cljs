@@ -3,23 +3,38 @@
             [re-com.core :as re-com]))
 
 
-;; solver 
 
+;; point-ring
 
-(defn point-ring [point-count size]
+(defn scale-point-ring [factor points]
+  (map 
+    (fn [[x y]] [(* x factor) (* y factor)])
+    points))
+
+(defn unit-point-ring [point-count]
   (let [step (/ (* 2 Math/PI) point-count)
         half-pi (/ Math/PI 2)]
     (for [i (range point-count)
           :let [angle (- (* i step) half-pi)]]
-      [(* size (Math/cos angle)) (* size (Math/sin angle))]))))
+      [(Math/cos angle) (Math/sin angle)])))
 
-(defn svg-panel []
+(defn point-ring
+  ([point-count] (unit-point-ring point-count))
+  ([point-count radius]
+    (scale-point-ring radius (unit-point-ring point-count))))
+
+;; svg
+
+(defn svg-panel [props & children]
   [:svg {
     :width "100%"
     :height "100%"
     :id "canvas"
     :style {:outline "2px solid black"
-            :background-color "red"}}])
+            :background-color "red"}}
+    (into children)])
+
+;; solver 
 
 (defn step-panel []
   [re-com/v-box
@@ -27,10 +42,22 @@
     :style {:background-color "blue"}
     :children [[:div]]])
 
+(defn section [{keys [points data]} & children]
+  (let [path-string "M10,10 L0,0"]
+    [:path {
+      :d path-string
+      :stroke-width "0.5"
+      :fill "none"
+      :stroke "green"}]))
+
+(defn layer [{:keys [points data]} & children]
+  [:g
+    (into children)])
+
 (defn graph-panel []
   [re-com/box
     :size "2"
-    :child [svg-panel]])
+    :child [svg-panel {} [:g]]])
 
 (defn solver-panel []
   (fn []

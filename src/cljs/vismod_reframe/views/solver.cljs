@@ -18,8 +18,6 @@
 
 (defn solver []
   (let [active-solver (re-frame/subscribe [:active-solver])]
-    (fn []
-      [re-com/box
-       :size "1"
-       :child [solver-panels @active-solver]
-      ])))
+    [re-com/box
+      :size "1"
+      :child [solver-panels @active-solver]]))
