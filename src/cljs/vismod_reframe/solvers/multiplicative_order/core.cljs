@@ -42,22 +42,27 @@
     :style {:background-color "blue"}
     :children [[:div]]])
 
-(defn section [{keys [points data]} & children]
+(defn section [{:keys [points data color]} & children]
   (let [path-string "M10,10 L0,0"]
     [:path {
       :d path-string
       :stroke-width "0.5"
       :fill "none"
-      :stroke "green"}]))
+      :stroke color}]))
 
 (defn layer [{:keys [points data]} & children]
   [:g
+    [section [(:orange data) points "orange"]]
+    [section [(:red data) points "red"]]
     (into children)])
 
 (defn graph-panel []
   [re-com/box
     :size "2"
-    :child [svg-panel {} [:g]]])
+    :child [svg-panel {} 
+      [layer [
+        [[0 0] [4 4]] 
+        #{:red [0 1 1 0] :orange [1 0 0 1]}]]]])
 
 (defn solver-panel []
   (fn []

@@ -24,8 +24,7 @@
                                     "resources/public/css"]
 
   :figwheel {:css-dirs ["resources/public/css"]
-             :ring-handler vismod-reframe.handler/dev-handler
-             :hawk-options {:watcher :polling}}
+             :ring-handler vismod-reframe.handler/dev-handler}
 
   :garden {:builds [{:id           "screen"
                      :source-paths ["src/clj"]
@@ -38,7 +37,7 @@
    {:dependencies [[binaryage/devtools "0.9.4"]
                    [re-frisk "0.5.0"]]
 
-    :plugins      [[lein-figwheel "0.5.13"]
+    :plugins      [[lein-figwheel "0.5.14"]
                    [lein-doo "0.1.7"]]
     }}
 
