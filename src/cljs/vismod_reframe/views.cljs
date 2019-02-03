@@ -1,8 +1,15 @@
 (ns vismod-reframe.views
-  (:require [re-frame.core :as re-frame]
+  (:require [material-ui]
+            [material-ui-icons]
+            [re-frame.core :as re-frame]
             [re-com.core :as re-com]
+            [reagent.core :as r]
             [vismod-reframe.views.main-menu :as main-menu]
-            [vismod-reframe.views.solver :as solver]))
+            [vismod-reframe.views.solver :as solver]
+            [id.nadiar.cljs-mui.core :as mui]
+            [id.nadiar.cljs-mui.icons :as icon]
+            [id.nadiar.cljs-mui.style :refer [theme] :as style]
+            [goog.object :as gobj]))
 
 
 ;; home
@@ -50,12 +57,29 @@
     :about-panel [about-panel]
     [:div]))
 
+(comment
+  (defn main-panel []
+    (let [active-panel (re-frame/subscribe [:active-panel])]
+      (fn []
+        [re-com/h-box
+        :width "100%"
+        :height "100%"
+        :children [[main-menu/main-menu] [solver/solver]]
+        ]))))
+
+(def custom-style
+  {:button {:margin (gobj/getValueByKeys theme "spacing" "uint")}})
+
+(def with-my-styles (style/with-style custom-style))
+
+(defn my-button [{:keys [classes] :as props}]
+  [mui/button {:variant "contained"}
+   "Hellow Worldie!"])
+
+(defn main-grid [{keys [classes children] :as props}]
+  [mui/grid {:container true
+             :direction "column"}])
+
 (defn main-panel []
-  (let [active-panel (re-frame/subscribe [:active-panel])]
-    (fn []
-      [re-com/h-box
-       :width "100%"
-       :height "100%"
-       :children [[main-menu/main-menu] [solver/solver]]
-      ])))
+  [:> (r/reactify-component main-grid)])
 

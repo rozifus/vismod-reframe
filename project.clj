@@ -15,7 +15,9 @@
                  [secretary "1.2.3"]
                  [garden "1.3.2"]
                  [yogthos/config "1.1.1"]
-                 [cljsjs/material-ui "3.9.1-0"]]
+                 [cljsjs/material-ui "3.2.0-0"]
+                 [cljsjs/material-ui-icons "3.0.1-0"]
+                 [id.nadiar/cljs-mui "0.1.0-beta2"]]
 
   :plugins [[lein-figwheel "0.5.16"]
             [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]
